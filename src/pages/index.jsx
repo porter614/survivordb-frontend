@@ -5,8 +5,6 @@ import PropTypes from "prop-types"
 import { graphql } from "gatsby"
 import { ThemeContext, Layout } from "../layouts"
 import Hero from "../components/Hero"
-import Seo from "../components/SEO"
-import FeatureCard from "../components/Feature/featureCard"
 import FeatureContainer from "../components/Feature/featureContainer"
 
 class IndexPage extends React.Component {
