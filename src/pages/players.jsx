@@ -302,13 +302,12 @@ const ContestantsTable = props => {
             <SEO title="Players" />
             <div align="center">
               <h1
-                // className="title is-1"
                 style={{
                   fontFamily: "Survivants",
                   color: "#ffffff",
                   fontSize: "4vw",
                   textShadow: "#000 0px 0px 10px",
-                  padding: "20px"
+                  padding: "5vh"
                 }}
               >
                 Players

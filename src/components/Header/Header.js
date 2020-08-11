@@ -36,8 +36,11 @@ class Header extends React.Component {
 
     return (
       <React.Fragment>
+        <VisibilitySensor onChange={this.visibilitySensorChange}>
+          <div className="sensor" />
+        </VisibilitySensor>
         <header className={`header ${this.getHeaderSize()}`}>
-          <Link to="/" className="logoType">
+          {/* <Link to="/" className="logoType">
             <div className="logo">
               <img
                 src={
@@ -50,7 +53,7 @@ class Header extends React.Component {
               <h1>{config.headerTitle}</h1>
               <h2>{config.headerSubTitle}</h2>
             </div>
-          </Link>
+          </Link> */}
           <FontLoadedContext.Consumer>
             {loaded => (
               <ScreenWidthContext.Consumer>
@@ -67,9 +70,6 @@ class Header extends React.Component {
             )}
           </FontLoadedContext.Consumer>
         </header>
-        <VisibilitySensor onChange={this.visibilitySensorChange}>
-          <div className="sensor" />
-        </VisibilitySensor>
       </React.Fragment>
     )
   }

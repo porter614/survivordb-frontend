@@ -119,6 +119,13 @@ class Layout extends React.Component {
                 src
               }
             }
+            castBgDesktop: imageSharp(
+              fluid: { originalName: { regex: "/cast/" } }
+            ) {
+              resize(width: 800, height: 1100, quality: 90, cropFocus: CENTER) {
+                src
+              }
+            }
           }
         `}
         render={data => {
@@ -132,13 +139,17 @@ class Layout extends React.Component {
             },
             bgMobile: {
               resize: { src: mobile }
+            },
+            castBgDesktop: {
+              resize: { src: castDesktop }
             }
           } = data
 
           const backgrounds = {
             desktop,
             tablet,
-            mobile
+            mobile,
+            castDesktop
           }
           const { children } = this.props
 

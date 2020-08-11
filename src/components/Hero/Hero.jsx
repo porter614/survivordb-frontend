@@ -1,6 +1,8 @@
 import React from "react"
 import PropTypes from "prop-types"
 
+import FeatureContainer from "../Feature/featureContainer"
+
 import { FaArrowDown } from "react-icons/fa/"
 import "./style.css"
 
@@ -61,6 +63,9 @@ const Hero = props => {
           padding-top: ${theme.header.height.homepage};
         }
       `}</style>
+      <div align="center">
+        <FeatureContainer />
+      </div>
     </React.Fragment>
   )
 }

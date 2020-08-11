@@ -8,7 +8,7 @@ const Expand = props => {
   return (
     <React.Fragment>
       <button className="more" to="#" onClick={onClick} aria-label="expand">
-        <FaAngleDown size={30} />
+        <FaAngleDown size="1vw" />
       </button>
     </React.Fragment>
   )

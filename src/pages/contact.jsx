@@ -1,36 +1,36 @@
 // Dependencies
-import React, { Component } from "react";
-import { ThemeContext } from "../layouts";
-import SEO from "../components/seo";
-import "./mystyles.scss";
-import { Paper } from "@material-ui/core";
-import axios from "axios";
-import { Formik } from "formik";
+import React, { Component } from "react"
+import { ThemeContext } from "../layouts"
+import SEO from "../components/seo"
+import "./mystyles.scss"
+import { Paper } from "@material-ui/core"
+import axios from "axios"
+import { Formik } from "formik"
 
 class Button extends Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
-      isClicked: false,
-    };
-    this.logFormDataToConsole = this.logFormDataToConsole.bind(this);
+      isClicked: false
+    }
+    this.logFormDataToConsole = this.logFormDataToConsole.bind(this)
   }
 
   logFormDataToConsole(event) {
-    this.setState({ isClicked: true });
-    console.log(this.props.formValues);
+    this.setState({ isClicked: true })
+    console.log(this.props.formValues)
     axios({
       method: "post",
       url: `${process.env.GATSBY_USERS_SERVICE_URL}/contact`,
       data: this.props.formValues,
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json" }
     })
-      .then((res) => {
-        console.log(res);
+      .then(res => {
+        console.log(res)
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch(err => {
+        console.log(err)
+      })
   }
 
   render() {
@@ -42,18 +42,18 @@ class Button extends Component {
       >
         Submit
       </button>
-    );
+    )
   }
 }
 
-const Field = (props) => (
+const Field = props => (
   <div
     style={{
       display: "block",
-      margin: "30px 0",
+      margin: "30px 0"
     }}
   >
-    <label style={{ fontFamily: "Survivants", fontSize: "1vw" }}>
+    <label style={{ fontFamily: "Survivants", fontSize: "2vmin" }}>
       {props.label}
     </label>
     <textarea
@@ -63,54 +63,56 @@ const Field = (props) => (
       onKeyUp={props.onChange}
     />
   </div>
-);
+)
 
 class Form extends Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       name: "",
       email: "",
-      message: "",
-    };
+      message: ""
+    }
     // To ensure 'this' when calling 'this.updateField' refers to Form and not Field, we do:
-    this.updateField = this.updateField.bind(this);
+    this.updateField = this.updateField.bind(this)
   }
 
   // Field could be 'name', 'email', or 'message'
   // Value is whatever the user types into the input field.
   updateField(field, value) {
-    this.setState({ [field]: value });
+    this.setState({ [field]: value })
   }
 
   render() {
     return (
       <React.Fragment>
         <ThemeContext.Consumer>
-          {(theme) => (
+          {theme => (
             <section
               className="section"
               style={{
                 backgroundImage: `url("${theme.backgrounds.desktop}")`,
-                backgroundSize: "100%",
-                height: "100vh",
+                backgroundSize: "cover",
+                display: "flex",
+                flexFlow: "column nowrap",
+                justifyContent: "center",
+                minHeight: "100vh"
               }}
             >
               <SEO title="Contact" />
               <div align="center" verticalAlign="center">
                 <Paper
                   style={{
-                    padding: "50px",
-                    margin: "25vh",
-                    display: "inline-block",
+                    padding: "5vmin",
+                    margin: "2vmin",
+                    display: "inline-block"
                   }}
-                  align="center"
                   elevation={10}
                 >
                   <div>
                     <Field
                       label="Name: "
-                      onChange={(event) =>
+                      onChange={event =>
                         this.updateField("name", event.target.value)
                       }
                       rows={1}
@@ -119,7 +121,7 @@ class Form extends Component {
 
                     <Field
                       label="Email: "
-                      onChange={(event) =>
+                      onChange={event =>
                         this.updateField("email", event.target.value)
                       }
                       rows={1}
@@ -128,17 +130,17 @@ class Form extends Component {
 
                     <Field
                       label="Message: "
-                      onChange={(event) =>
+                      onChange={event =>
                         this.updateField("message", event.target.value)
                       }
                       textarea={true}
                       rows={5}
-                      cols={50}
+                      cols="auto"
                       value={this.state.message}
                     />
                     <h4
                       style={{
-                        fontStyle: "italic",
+                        fontStyle: "italic"
                       }}
                     >
                       {" "}
@@ -157,8 +159,8 @@ class Form extends Component {
           )}
         </ThemeContext.Consumer>
       </React.Fragment>
-    );
+    )
   }
 }
 
-export default Form;
+export default Form

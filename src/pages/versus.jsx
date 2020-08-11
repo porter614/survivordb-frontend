@@ -9,27 +9,22 @@ import FormHelperText from "@material-ui/core/FormHelperText"
 import InputLabel from "@material-ui/core/InputLabel"
 import NativeSelect from "@material-ui/core/NativeSelect"
 import * as QueryString from "query-string"
+import { makeStyles } from "@material-ui/core/styles"
 
 import "./mystyles.scss"
-import Layout from "../components/layout"
+import { ThemeContext, Layout } from "../layouts"
 import SEO from "../components/seo"
 
-const styles = theme => ({
+const useStyles = makeStyles(theme => ({
   root: {
-    flexGrow: 1,
-    display: "inline-block",
-    zoom: "67%",
+    flexGrow: 1000,
+    display: "inline-block"
+    // zoom: "67%"
   },
   paper: {
-    padding: theme.spacing(2),
-    background: "linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)",
-    margin: "auto",
-    maxWidth: "100%",
-    width: 256,
-  },
-  image: {
-    width: 256,
-    height: 256,
+    margin: "2vmin",
+    elevation: 10,
+    padding: ".5vmin"
   },
   img: {
     margin: "auto",
@@ -40,13 +35,13 @@ const styles = theme => ({
     maxHeight: "50%",
     border: "3px solid",
     borderRadius: "50%",
-    borderColor: "#74c7e3",
+    borderColor: "#74c7e3"
   },
   formControl: {
-    margin: theme.spacing(1),
-    minWidth: 120,
+    margin: theme.spacing(1)
   },
-})
+  typography: { fontFamily: "Survivants", fontSize: "1.5vmin" }
+}))
 
 function calculateAge(birthday) {
   // birthday is a date
@@ -59,61 +54,58 @@ const nonCompareCells = [
   {
     field: "birthdate",
     title: "Age",
-    render: val => calculateAge(val),
+    render: val => calculateAge(val)
   },
   {
     field: "hometown",
     title: "Hometown",
-    render: val => val,
+    render: val => val
   },
   {
     field: "occupations",
     title: "Occupation",
-    render: val => val,
-  },
+    render: val => val
+  }
 ]
 
 const headCells = [
   {
     field: "challengeWins",
-    title: "Challenge Wins",
+    title: "Challenge Wins"
   },
   {
     field: "individualImmunityChallengeWins",
-    title: "Individual Immunity Challenge Wins",
+    title: "Individual Immunity Challenge Wins"
   },
   {
     field: "sitOuts",
-    title: "Challenge Sit Outs",
+    title: "Challenge Sit Outs"
   },
   {
     field: "tribalCouncilAppearances",
-    title: "Tribal Council Appearances",
+    title: "Tribal Council Appearances"
   },
   {
     field: "votesForBootee",
-    title: "Votes for Bootee",
+    title: "Votes for Bootee"
   },
   {
     field: "wrongSideOfTheVote",
-    title: "Wrong Side of the Vote",
+    title: "Wrong Side of the Vote"
   },
   {
     field: "votesAgainst",
-    title: "Votes against Player",
+    title: "Votes against Player"
   },
   {
     field: "juryVotesReceived",
-    title: "Jury Votes Received",
+    title: "Jury Votes Received"
   },
-  { field: "idols", title: "Idols Found" },
-  // { field: "place", title: "Place" },
+  { field: "idols", title: "Idols Found" }
 ]
 
 const PlayerCard = props => {
-  const [seasonPicker, setSeasonPicker] = useState(0)
-
-  useEffect(() => {}, [seasonPicker])
+  const styles = useStyles()
 
   return (
     <Grid item xs={4} justify="center">
@@ -122,26 +114,32 @@ const PlayerCard = props => {
         style={{
           backgroundColor: "#FFFF",
           borderColor: "#00000",
-          border: "1px solid",
+          padding: "1%",
+          borderRadius: "5%"
         }}
       >
-        <InputLabel shrink htmlFor="name-native">
+        {/* <InputLabel shrink htmlFor="name-native" style={{ align: "center" }}>
           Name
-        </InputLabel>
+        </InputLabel> */}
         <NativeSelect
           value={props.picker}
           onChange={props.onHandleChange}
           inputProps={{
             name: "name",
-            id: "name-native",
+            id: "name-native"
           }}
-          style={{ fontFamily: "Survivants", fontSize: 15 }}
+          className={styles.typography}
         >
-          <option value="">None</option>
-          {Object.keys(props.playerNames).map((key, index) => (
-            <option key={index} value={props.playerNames[key]}>
-              {key}
-            </option>
+          {Object.keys(props.playerNames).map((season, _) => (
+            <optgroup label={`Season ${season}`}>
+              {Object.keys(props.playerNames[season]).map(
+                (contestant_id, _) => (
+                  <option key={contestant_id} value={contestant_id}>
+                    {props.playerNames[season][contestant_id]}
+                  </option>
+                )
+              )}
+            </optgroup>
           ))}
         </NativeSelect>
         <FormHelperText>Compare Against</FormHelperText>
@@ -154,34 +152,35 @@ const PlayerCard = props => {
           <div style={{ padding: 20 }}>
             <Grid container justify="center">
               <Grid item xs={12} p>
-                <div style={{ width: 256 }}>
-                  <img
-                    border="5px solid"
-                    box-shadow="50px 50px 113px"
-                    style={{
-                      objectFit: "cover",
-                      width: "100%",
-                      height: "350px",
-                      borderColor: "#74c7e3",
-                      borderRadius: "50%",
-                    }}
-                    src={props.contestant.career.profile_image_link}
-                  />
-                </div>
+                <img
+                  alt=""
+                  style={{
+                    // height: "40vh",
+                    width: "50%",
+                    aspectRatio: "2",
+                    borderColor: "#74c7e3",
+                    borderRadius: "50%"
+                  }}
+                  src={props.contestant.career.profile_image_link}
+                />
               </Grid>
               <Grid item xs={12}>
-                <Typography style={{ fontFamily: "Survivants", fontSize: 20 }}>
+                <Typography className={styles.typography}>
                   {props.contestant.appearance.contestant}
                 </Typography>
               </Grid>
               <Grid item xs={12}>
                 <FormControl className={styles.formControl}>
-                  <InputLabel shrink htmlFor="name-native">
+                  <InputLabel
+                    className={styles.typography}
+                    shrink
+                    htmlFor="name-native"
+                  >
                     Season
                   </InputLabel>
                   <NativeSelect
                     onChange={props.onHandleSeasonChange}
-                    style={{ fontFamily: "Survivants", fontSize: 15 }}
+                    className={styles.typography}
                   >
                     <option value={0}>Career</option>
                     {props.contestant.career.seasons.map(
@@ -198,7 +197,7 @@ const PlayerCard = props => {
                 <div align="center">
                   {nonCompareCells.map(statistic => (
                     // eslint-disable-next-line react/jsx-key
-                    <Card className={styles.paper} style={{ margin: "20px" }}>
+                    <Card className={styles.paper}>
                       <ExtraContestantStatistic
                         size={12}
                         stat={statistic.title}
@@ -219,17 +218,15 @@ const PlayerCard = props => {
                           ? props.contestant.appearance[statistic.field] >
                             props.against.appearance[statistic.field]
                             ? {
-                                margin: "20px",
-                                background: "#61e885",
+                                background: "#61e885"
                               }
-                            : props.contestant.appearance[statistic.field] ==
+                            : props.contestant.appearance[statistic.field] ===
                               props.against.appearance[statistic.field]
                             ? {
-                                margin: "20px",
-                                background: "#faff70",
+                                background: "#faff70"
                               }
-                            : { margin: "20px", background: "#fc806a" }
-                          : { margin: "20px" }
+                            : { background: "#fc806a" }
+                          : {}
                       }
                     >
                       <ExtraContestantStatistic
@@ -256,9 +253,9 @@ class Versus extends Component {
     this.state = {
       contestant: null,
       against: null,
-      picker: "Tyson Apostol",
-      againstPicker: "Tyson Apostol",
-      playerNames: {},
+      picker: "",
+      againstPicker: "",
+      playerNames: []
     }
 
     this.handleChangeContestant = this.handleChangeContestant.bind(this)
@@ -282,8 +279,8 @@ class Versus extends Component {
           ...s,
           [who]: {
             career: res.data,
-            appearance: res.data,
-          },
+            appearance: res.data
+          }
         }))
         console.log(this.state)
       })
@@ -303,7 +300,7 @@ class Versus extends Component {
         console.log(res.data[0])
         this.setState(s => ({
           ...s,
-          [who]: { ...s[who], appearance: res.data[0] },
+          [who]: { ...s[who], appearance: res.data[0] }
         }))
         console.log(this.state)
       })
@@ -316,6 +313,7 @@ class Versus extends Component {
     axios
       .get(`${process.env.GATSBY_USERS_SERVICE_URL}/contestants/names`)
       .then(res => {
+        console.log(res)
         this.setState(s => ({ ...s, playerNames: res.data }))
       })
       .catch(err => {
@@ -326,7 +324,7 @@ class Versus extends Component {
   handleChangeContestant(event) {
     this.setState({
       ...this.state,
-      picker: event.target.value,
+      picker: event.target.value
     })
     this.getCareer("contestant", event.target.value)
   }
@@ -334,7 +332,7 @@ class Versus extends Component {
   handleChangeAgainst(event) {
     this.setState({
       ...this.state,
-      againstPicker: event.target.value,
+      againstPicker: event.target.value
     })
     this.getCareer("against", event.target.value)
   }
@@ -361,7 +359,6 @@ class Versus extends Component {
 
   componentDidMount() {
     this.getPlayerNames()
-    console.log("hello world")
     const params = QueryString.parse(this.props.location.search)
     let p1id
     if (params.id === undefined) {
@@ -375,50 +372,67 @@ class Versus extends Component {
     this.setState({
       ...this.state,
       picker: p1id,
-      againstPicker: p2id,
+      againstPicker: p2id
     })
   }
 
   render() {
     return (
-      <Layout>
-        <SEO title="Versus" />
-        <div className={styles.root} align="center">
-          <h1
-            className="title is-1"
-            style={{
-              fontFamily: "Survivants",
-              color: "#74c7e3",
-              textShadow: "#000 0px 0px 10px",
-            }}
-          >
-            Contestant Matchup
-          </h1>
-          <hr />
-          <br />
-          <Grid container>
-            <Grid item xs={1} />
-            <PlayerCard
-              playerNames={this.state.playerNames}
-              contestant={this.state.contestant}
-              against={this.state.against}
-              onHandleChange={this.handleChangeContestant}
-              onHandleSeasonChange={this.handleChangeContestantSeason}
-              picker={this.state.picker}
-            />
-            <Grid item xs={2} />
-            <PlayerCard
-              playerNames={this.state.playerNames}
-              contestant={this.state.against}
-              against={this.state.contestant}
-              onHandleChange={this.handleChangeAgainst}
-              onHandleSeasonChange={this.handleChangeAgainstSeason}
-              picker={this.state.againstPicker}
-            />
-            <Grid item xs={1} />
-          </Grid>
-        </div>
-      </Layout>
+      <React.Fragment>
+        <ThemeContext.Consumer>
+          {theme => (
+            <section
+              className="section"
+              style={{
+                backgroundImage: `url("${theme.backgrounds.castDesktop}")`,
+                backgroundSize: "cover",
+                display: "flex",
+                flexFlow: "column nowrap",
+                justifyContent: "center",
+                minHeight: "100vh"
+              }}
+            >
+              <SEO title="Versus" />
+              <div align="center">
+                <h1
+                  style={{
+                    fontFamily: "Survivants",
+                    color: "#ffffff",
+                    fontSize: "4vw",
+                    textShadow: "#000 0px 0px 10px",
+                    padding: "5vh"
+                  }}
+                >
+                  Contestant Matchup
+                </h1>
+                <hr />
+                <br />
+                <Grid container>
+                  <Grid item xs={1} />
+                  <PlayerCard
+                    playerNames={this.state.playerNames}
+                    contestant={this.state.contestant}
+                    against={this.state.against}
+                    onHandleChange={this.handleChangeContestant}
+                    onHandleSeasonChange={this.handleChangeContestantSeason}
+                    picker={this.state.picker}
+                  />
+                  <Grid item xs={2} />
+                  <PlayerCard
+                    playerNames={this.state.playerNames}
+                    contestant={this.state.against}
+                    against={this.state.contestant}
+                    onHandleChange={this.handleChangeAgainst}
+                    onHandleSeasonChange={this.handleChangeAgainstSeason}
+                    picker={this.state.againstPicker}
+                  />
+                  <Grid item xs={1} />
+                </Grid>
+              </div>
+            </section>
+          )}
+        </ThemeContext.Consumer>
+      </React.Fragment>
     )
   }
 }

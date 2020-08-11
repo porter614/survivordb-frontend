@@ -31,8 +31,6 @@ class IndexPage extends React.Component {
         </ThemeContext.Consumer>
 
         <hr ref={this.separator} />
-
-        <FeatureContainer />
       </React.Fragment>
     )
   }

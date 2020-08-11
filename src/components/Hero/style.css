@@ -29,14 +29,15 @@ h1 {
 }
 
 .heroButton {
-  background: #709425;
+  background: orange;
   border: 0;
   border-radius: 50%;
-  font-size: 1.35em;
-  padding: 10px 20px;
+  font-size: 3vmin;
+  /* padding: 10px 20px; */
   cursor: pointer;
-  width: 80px;
-  height: 80px;
+  width: 10vmin;
+  height: 10vmin;
+  text-align: center;
 
   &:focus {
     outline-style: none;
@@ -44,10 +45,8 @@ h1 {
   }
 
   :global(svg) {
-    position: relative;
-    top: 5px;
     fill: #ffffff;
-    stroke-width: 40;
+    stroke-width: 5vmin;
     stroke: #ffffff;
     animation-duration: 1s;
     animation-name: buttonIconMove;
@@ -60,29 +59,9 @@ h1 {
     transform: translateY(0);
   }
   50% {
-    transform: translateY(-10px);
+    transform: translateY(-1vh);
   }
   100% {
     transform: translateY(0);
-  }
-}
-
-@from-width tablet {
-  h1 {
-    max-width: 90%;
-  }
-
-  button {
-    font-size: 1.7em;
-  }
-}
-
-@from-width desktop {
-  h1 {
-    max-width: 80%;
-  }
-
-  button {
-    font-size: 2em;
   }
 }

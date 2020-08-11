@@ -15,10 +15,10 @@ const useStyles = makeStyles(theme => ({
   },
   paper: {
     padding: theme.spacing(1),
-    background: "linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)",
-    padding: "10px",
-    maxWidth: "100%",
-    margin: "20px"
+    background: "linear-gradient(20deg, #FFFFFF 0%, #D4AF37 99%)",
+    padding: "1%",
+    maxWidth: "50%",
+    margin: "2%"
   },
   image: {
     width: 256,
@@ -73,21 +73,21 @@ const ContestantToggle = props => {
         <Grid container spacing={10}>
           <Grid item xs={3} align="center">
             <Grid item xs={12}>
-              <Card className={classes.paper} align="center" elevation={10}>
-                <Typography variant="h6" style={{ fontFamily: "Survivants" }}>
-                  {nth[props.appearance.place]}
-                </Typography>
-              </Card>
               <img
                 className={classes.img}
                 alt="complex"
                 src={`https://survivordb.s3-us-west-2.amazonaws.com/${props.appearance.season}.jpg`}
                 style={{
                   objectFit: "cover",
-                  width: "40vh",
+                  width: "20vh",
                   height: "100%"
                 }}
               />
+              <Card className={classes.paper} align="center" elevation={10}>
+                <Typography variant="h6" style={{ fontFamily: "Survivants" }}>
+                  {nth[props.appearance.place]}
+                </Typography>
+              </Card>
             </Grid>
           </Grid>
           <Grid item xs={9}>
@@ -95,11 +95,11 @@ const ContestantToggle = props => {
               <Grid item xs={12}>
                 <Typography
                   gutterBottom
-                  variant="h6"
+                  variant="h4"
                   align="center"
                   style={{ fontFamily: "Survivants" }}
                 >
-                  Additional Metrics
+                  Appearance Metrics
                 </Typography>
               </Grid>
               <Grid item xs={12}>
@@ -151,9 +151,7 @@ const ContestantToggle = props => {
               <Grid item xs={12}>
                 <br />
               </Grid>
-              <Grid item xs={12}>
-                <br />
-              </Grid>
+
               <Grid item xs={12} align="center">
                 <ButtonBase>
                   <Link to={`/versus?id=${props.appearance.contestant_id}`}>

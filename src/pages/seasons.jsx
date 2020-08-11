@@ -173,8 +173,11 @@ const SeasonsTable = props => {
             className="section"
             style={{
               backgroundImage: `url("${theme.backgrounds.desktop}")`,
-              backgroundSize: "100%"
-              // height: "100%"
+              backgroundSize: "cover",
+              display: "flex",
+              flexFlow: "column nowrap",
+              justifyContent: "center",
+              minHeight: "100vh"
             }}
           >
             <SEO title="Seasons" />
@@ -186,7 +189,7 @@ const SeasonsTable = props => {
                   color: "#ffffff",
                   fontSize: "4vw",
                   textShadow: "#000 0px 0px 10px",
-                  padding: "20px"
+                  padding: "5vh"
                 }}
               >
                 Seasons

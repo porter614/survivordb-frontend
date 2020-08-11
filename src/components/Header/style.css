@@ -67,25 +67,39 @@ h2 {
   left: 0;
   right: 0;
   height: 1px;
-  top: 100px;
+  top: 1px;
 }
 
-@from-width tablet {
-  .header {
-    padding: 40px;
+.header {
+  align-items: center;
+  background-color: transparent;
+  display: flex;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  justify-content: space-between;
+  transition: padding 0.5s;
 
-    &.homepage {
-      height: 100px;
+  &.fixed {
+    height: 50px;
+    background-color: #2c424d;
+    left: 0;
+    padding: 0 20px;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 10;
+
+    h1 {
+      margin: 0 0 2px 0;
+    }
+
+    h2 {
+      display: none;
     }
   }
-}
 
-@below desktop {
-  .header.homepage {
-    .logo {
-      border: none;
-    }
-
+  &.homepage:not(.fixed) {
     :global(a.logoType),
     h1 {
       color: #ffffff;
@@ -96,78 +110,36 @@ h2 {
   }
 }
 
-@from-width desktop {
-  .header {
-    align-items: center;
-    background-color: #ffffff;
-    display: flex;
-    position: absolute;
-    top: 0;
-    width: 100%;
-    justify-content: space-between;
-    transition: padding 0.5s;
+.header :global(a.logoType) {
+  text-align: left;
+  flex-direction: row;
+  flex-shrink: 0;
+  width: auto;
+}
 
-    &.fixed {
-      height: 50px;
-      background-color: #2c424d;
-      left: 0;
-      padding: 0 20px;
-      position: fixed;
-      top: 0;
-      width: 100%;
-      z-index: 10;
+.logo {
+  margin: 0 20px 0 0;
 
-      h1 {
-        margin: 0 0 2px 0;
-      }
-
-      h2 {
-        display: none;
-      }
-    }
-
-    &.homepage:not(.fixed) {
-      :global(a.logoType),
-      h1 {
-        color: #ffffff;
-      }
-      h2 {
-        color: #dddbda;
-      }
-    }
+  .fixed & {
+    height: 36px;
+    width: 36px;
   }
 
-  .header :global(a.logoType) {
-    text-align: left;
-    flex-direction: row;
-    flex-shrink: 0;
-    width: auto;
+  .header.homepage:not(.fixed) & {
+    border: none;
   }
+}
 
-  .logo {
-    margin: 0 20px 0 0;
+h2 {
+  animation-duration: 0.5s;
+  animation-name: h2Entry;
+}
 
-    .fixed & {
-      height: 36px;
-      width: 36px;
-    }
-
-    .header.homepage:not(.fixed) & {
-      border: none;
-    }
+@keyframes h2Entry {
+  from {
+    opacity: 0;
   }
-
-  h2 {
-    animation-duration: 0.5s;
-    animation-name: h2Entry;
-  }
-
-  @keyframes h2Entry {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
+  to {
+    opacity: 1;
   }
 }
