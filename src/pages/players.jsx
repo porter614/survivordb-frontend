@@ -3,7 +3,7 @@ import { forwardRef } from "react"
 import axios from "axios"
 import MaterialTable, { MTableToolbar } from "material-table"
 
-import { createMuiTheme } from "@material-ui/core/styles"
+import { createTheme } from "@material-ui/core/styles"
 import { makeStyles } from "@material-ui/core/styles"
 
 import AddBox from "@material-ui/icons/AddBox"
@@ -28,7 +28,7 @@ import Select from "@material-ui/core/Select"
 import InputLabel from "@material-ui/core/InputLabel"
 
 import "./mystyles.scss"
-import { ThemeContext, Layout } from "../layouts"
+import { ThemeContext } from "../layouts"
 import SEO from "../components/seo"
 
 const tableIcons = {
@@ -240,7 +240,7 @@ const spliceCareerHeaders = () => {
 const careerHeaders = spliceCareerHeaders()
 const appearanceHeaders = headCells.concat(appearanceSpecficCells)
 
-const theme = createMuiTheme({
+const theme = createTheme({
   overrides: {
     MuiTableRow: {
       "&:hover": {
