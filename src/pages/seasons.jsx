@@ -3,7 +3,7 @@ import { forwardRef } from "react"
 import axios from "axios"
 import MaterialTable, { MTableToolbar } from "material-table"
 
-import { createMuiTheme } from "@material-ui/core/styles"
+import { createTheme } from "@material-ui/core/styles"
 import { makeStyles } from "@material-ui/core/styles"
 
 import AddBox from "@material-ui/icons/AddBox"
@@ -135,7 +135,7 @@ const headCells = [
   }
 ]
 
-const theme = createMuiTheme({
+const theme = createTheme({
   overrides: {
     MuiTableRow: {
       "&:hover": {
