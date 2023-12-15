@@ -155,7 +155,7 @@ const PlayerCard = props => {
                 <img
                   alt=""
                   style={{
-                    // height: "40vh",
+                    height: "35vh",
                     width: "50%",
                     aspectRatio: "2",
                     borderColor: "#74c7e3",

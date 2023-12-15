@@ -76,7 +76,7 @@ const ContestantToggle = props => {
               <img
                 className={classes.img}
                 alt="complex"
-                src={`https://survivordb.s3-us-west-2.amazonaws.com/${props.appearance.season}.jpg`}
+                src={`https://survivordb.s3.amazonaws.com/${props.appearance.season}.jpg`}
                 style={{
                   objectFit: "cover",
                   width: "20vh",

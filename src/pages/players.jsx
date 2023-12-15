@@ -26,7 +26,7 @@ import ContestantToggle from "../components/ContestantToggle"
 import FormControl from "@material-ui/core/FormControl"
 import Select from "@material-ui/core/Select"
 import InputLabel from "@material-ui/core/InputLabel"
-
+import alltimeSurvivorPlayers from "../data"
 import "./mystyles.scss"
 import { ThemeContext } from "../layouts"
 import SEO from "../components/seo"
@@ -255,7 +255,7 @@ const ContestantsTable = props => {
   const [state, setState] = useState("Individual Appearance")
   const [data, setData] = useState({
     headers: headCells,
-    rows: []
+    rows: alltimeSurvivorPlayers
   })
 
   const handleChange = event => {
@@ -273,18 +273,10 @@ const ContestantsTable = props => {
       path = "contestants/careers"
       headers = careerHeaders
     }
-    console.log(`${process.env.GATSBY_USERS_SERVICE_URL}`)
-    axios
-      .get(`${process.env.GATSBY_USERS_SERVICE_URL}/${path}`)
-      .then(res => {
-        setData({
-          headers: headers,
-          rows: res.data
-        })
-      })
-      .catch(err => {
-        console.log(err)
-      })
+    setData({
+      headers: headers,
+      rows: alltimeSurvivorPlayers
+    })
   }, [state])
 
   return (
